@@ -1,13 +1,15 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 class MySQL():
     def __init__(self, table) -> None:
         # Establish a connection to the MySQL database
         self.cnx = mysql.connector.connect(
-            host='47.242.43.132',  # Replace with your MySQL host
-            user='root',  # Replace with your MySQL username
-            password='dsfwer@#$23fdsff3245',  # Replace with your MySQL password
+            host='18.179.195.219',  # Replace with your MySQL host
+            user='zag_shop',  # Replace with your MySQL username
+            port='3308',
+            password='DYr36i3P5Bz2Mzpj',  # Replace with your MySQL password
             database=table  # Replace with your MySQL database name
         )
 
@@ -23,12 +25,12 @@ class MySQL():
     def insert_into_product_inventory(self, data):
         try:
             insert_query = """
-            INSERT INTO zag_product_inventory_history (item_code, in_stock, price)
-            VALUES (%s, %s, %s)
+            INSERT INTO zag_product_inventory_history (product_id, is_available, price, is_take_off, take_off_time, update_time)
+            VALUES (%s, %s, %s, %s, %s, %s)
             """
             self.cursor.executemany(insert_query, data)
             self.cnx.commit()
-
+            print("insert successful")
         except Error as e:
             print("insert error", e)  
         finally:
@@ -39,13 +41,3 @@ class MySQL():
         # Close the cursor and connection
         self.cursor.close()
         self.cnx.close()
-
-
-# rakutencon = MySQL('rakutencon')
-# items = [
-#     ('test_code:1111', 1, 34.5),
-#     ('test_code:2222', 0, 33.5),
-# ]
-# rakutencon.insert_into_product_inventory(items)
-# items = rakutencon.get_item_from_table('aucbreakout_item')
-# print(len(items))
