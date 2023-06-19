@@ -42,7 +42,7 @@ def lambda_handler():
         current_time = datetime.now()
         if item_api:
             i = {
-                'product_id': item_db[5],
+                'product_id': item_db[1],
                 'is_available': item_api.get('availability'),
                 'price': item_api.get('itemPrice'),
                 'is_take_off': not item_api.get('availability'),
@@ -51,7 +51,7 @@ def lambda_handler():
                 }
         else:
             i = {
-                'product_id': item_db[5],
+                'product_id': item_db[1],
                 'is_available': 0,
                 'price': 0,
                 'is_take_off': 1,
@@ -60,7 +60,7 @@ def lambda_handler():
                 }
         modify.append(i)
         # every 0.5 seconds make a request to rakuten api
-        time.sleep(0.25)
+        time.sleep(0.3)
 
     json_file.write(json.dumps(modify))
     json_file.close()
