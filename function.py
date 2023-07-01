@@ -64,6 +64,7 @@ def lambda_handler():
 
     json_file.write(json.dumps(modify))
     json_file.close()
+    db.backup_product_inventory()
     insert_into_db(timestamp +'.json')
 
 def insert_into_db(filename):
