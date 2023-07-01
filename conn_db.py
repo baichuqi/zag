@@ -58,6 +58,3 @@ class MySQL():
         # Close the cursor and connection
         self.cursor.close()
         self.cnx.close()
-
-db = MySQL("zag_shop")
-db.backup_product_inventory()
